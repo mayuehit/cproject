@@ -29,9 +29,9 @@ _Z4funci:
 	.cfi_endproc
 .LFE1519:
 	.size	_Z4funci, .-_Z4funci
-	.globl	_Z8funcfuncPFiiE
-	.type	_Z8funcfuncPFiiE, @function
-_Z8funcfuncPFiiE:
+	.globl	_Z8funcfuncPFiiEi
+	.type	_Z8funcfuncPFiiEi, @function
+_Z8funcfuncPFiiEi:
 .LFB1520:
 	.cfi_startproc
 	endbr32
@@ -45,10 +45,12 @@ _Z8funcfuncPFiiE:
 	.cfi_offset 3, -12
 	call	__x86.get_pc_thunk.bx
 	addl	$_GLOBAL_OFFSET_TABLE_, %ebx
+	movl	8(%ebp), %eax
+	movl	%eax, -16(%ebp)
 	leal	8(%ebp), %eax
 	movl	%eax, -12(%ebp)
 	subl	$8, %esp
-	pushl	-12(%ebp)
+	pushl	-16(%ebp)
 	movl	_ZSt4cout@GOT(%ebx), %eax
 	pushl	%eax
 	call	_ZNSolsEPKv@PLT
@@ -60,8 +62,7 @@ _Z8funcfuncPFiiE:
 	call	_ZNSolsEPFRSoS_E@PLT
 	addl	$16, %esp
 	subl	$8, %esp
-	leal	8(%ebp), %eax
-	pushl	%eax
+	pushl	-12(%ebp)
 	movl	_ZSt4cout@GOT(%ebx), %eax
 	pushl	%eax
 	call	_ZNSolsEPKv@PLT
@@ -85,7 +86,7 @@ _Z8funcfuncPFiiE:
 	ret
 	.cfi_endproc
 .LFE1520:
-	.size	_Z8funcfuncPFiiE, .-_Z8funcfuncPFiiE
+	.size	_Z8funcfuncPFiiEi, .-_Z8funcfuncPFiiEi
 	.globl	main
 	.type	main, @function
 main:
@@ -103,14 +104,22 @@ main:
 	pushl	%ecx
 	.cfi_escape 0xf,0x3,0x75,0x78,0x6
 	.cfi_escape 0x10,0x3,0x2,0x75,0x7c
-	subl	$16, %esp
+	subl	$32, %esp
 	call	__x86.get_pc_thunk.bx
 	addl	$_GLOBAL_OFFSET_TABLE_, %ebx
+	movl	%gs:20, %eax
+	movl	%eax, -12(%ebp)
+	xorl	%eax, %eax
+	movl	$10, -24(%ebp)
+	leal	_Z4funci@GOTOFF(%ebx), %eax
+	movl	%eax, -20(%ebp)
+	leal	_Z4funci@GOTOFF(%ebx), %eax
+	movl	%eax, -28(%ebp)
 	subl	$8, %esp
-	pushl	$1
+	pushl	-20(%ebp)
 	movl	_ZSt4cout@GOT(%ebx), %eax
 	pushl	%eax
-	call	_ZNSolsEb@PLT
+	call	_ZNSolsEPKv@PLT
 	addl	$16, %esp
 	subl	$8, %esp
 	movl	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@GOT(%ebx), %edx
@@ -118,16 +127,32 @@ main:
 	pushl	%eax
 	call	_ZNSolsEPFRSoS_E@PLT
 	addl	$16, %esp
-	movl	$10, -20(%ebp)
-	leal	_Z4funci@GOTOFF(%ebx), %eax
-	movl	%eax, -16(%ebp)
-	movl	$11, -12(%ebp)
-	subl	$12, %esp
+	subl	$8, %esp
+	leal	-28(%ebp), %eax
+	pushl	%eax
+	movl	_ZSt4cout@GOT(%ebx), %eax
+	pushl	%eax
+	call	_ZNSolsEPKv@PLT
+	addl	$16, %esp
+	subl	$8, %esp
+	movl	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@GOT(%ebx), %edx
+	pushl	%edx
+	pushl	%eax
+	call	_ZNSolsEPFRSoS_E@PLT
+	addl	$16, %esp
+	movl	$11, -16(%ebp)
+	subl	$8, %esp
+	pushl	$2
 	leal	_Z4funci@GOTOFF(%ebx), %eax
 	pushl	%eax
-	call	_Z8funcfuncPFiiE
+	call	_Z8funcfuncPFiiEi
 	addl	$16, %esp
 	movl	$0, %eax
+	movl	-12(%ebp), %ecx
+	xorl	%gs:20, %ecx
+	je	.L7
+	call	__stack_chk_fail_local
+.L7:
 	leal	-8(%ebp), %esp
 	popl	%ecx
 	.cfi_restore 1
@@ -144,7 +169,7 @@ main:
 	.size	main, .-main
 	.type	_Z41__static_initialization_and_destruction_0ii, @function
 _Z41__static_initialization_and_destruction_0ii:
-.LFB2009:
+.LFB2008:
 	.cfi_startproc
 	endbr32
 	pushl	%ebp
@@ -158,9 +183,9 @@ _Z41__static_initialization_and_destruction_0ii:
 	call	__x86.get_pc_thunk.bx
 	addl	$_GLOBAL_OFFSET_TABLE_, %ebx
 	cmpl	$1, 8(%ebp)
-	jne	.L9
+	jne	.L10
 	cmpl	$65535, 12(%ebp)
-	jne	.L9
+	jne	.L10
 	subl	$12, %esp
 	leal	_ZStL8__ioinit@GOTOFF(%ebx), %eax
 	pushl	%eax
@@ -175,7 +200,7 @@ _Z41__static_initialization_and_destruction_0ii:
 	pushl	%eax
 	call	__cxa_atexit@PLT
 	addl	$16, %esp
-.L9:
+.L10:
 	nop
 	movl	-4(%ebp), %ebx
 	leave
@@ -184,11 +209,11 @@ _Z41__static_initialization_and_destruction_0ii:
 	.cfi_def_cfa 4, 4
 	ret
 	.cfi_endproc
-.LFE2009:
+.LFE2008:
 	.size	_Z41__static_initialization_and_destruction_0ii, .-_Z41__static_initialization_and_destruction_0ii
 	.type	_GLOBAL__sub_I__Z4funci, @function
 _GLOBAL__sub_I__Z4funci:
-.LFB2010:
+.LFB2009:
 	.cfi_startproc
 	endbr32
 	pushl	%ebp
@@ -209,7 +234,7 @@ _GLOBAL__sub_I__Z4funci:
 	.cfi_def_cfa 4, 4
 	ret
 	.cfi_endproc
-.LFE2010:
+.LFE2009:
 	.size	_GLOBAL__sub_I__Z4funci, .-_GLOBAL__sub_I__Z4funci
 	.section	.init_array,"aw"
 	.align 4
@@ -219,24 +244,25 @@ _GLOBAL__sub_I__Z4funci:
 	.hidden	__x86.get_pc_thunk.ax
 	.type	__x86.get_pc_thunk.ax, @function
 __x86.get_pc_thunk.ax:
-.LFB2011:
+.LFB2010:
 	.cfi_startproc
 	movl	(%esp), %eax
 	ret
 	.cfi_endproc
-.LFE2011:
+.LFE2010:
 	.section	.text.__x86.get_pc_thunk.bx,"axG",@progbits,__x86.get_pc_thunk.bx,comdat
 	.globl	__x86.get_pc_thunk.bx
 	.hidden	__x86.get_pc_thunk.bx
 	.type	__x86.get_pc_thunk.bx, @function
 __x86.get_pc_thunk.bx:
-.LFB2012:
+.LFB2011:
 	.cfi_startproc
 	movl	(%esp), %ebx
 	ret
 	.cfi_endproc
-.LFE2012:
+.LFE2011:
 	.hidden	__dso_handle
+	.hidden	__stack_chk_fail_local
 	.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
 	.section	.note.GNU-stack,"",@progbits
 	.section	.note.gnu.property,"a"
